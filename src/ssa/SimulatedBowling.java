@@ -4,55 +4,66 @@ public class SimulatedBowling {
 
     int bowlingScores[][] = new int[3][10];
 
-    public void bowlingScores() {
+    public void bowl() {
 
-	int j = 0;
-	for (; j < bowlingScores.length; j++) {
+	System.out.println("Frames\t\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\tTotal");
+	System.out.println("-----------------------------------------------"
+		+ "-------------------------------------------------------");
 
-	    int i = 0;
+	int totalScorePerSeries = 0;
+
+	for (int j = 0; j < bowlingScores.length; j++) {
+
+	    System.out.print("Game " + (j + 1) + "\t");
 
 	    int totalScorePerGame = 0;
 
-	    for (; i < 10; i++) {
+	    for (int i = 0; i < 10; i++) {
 
-		int firstThrow = getPinsKnockedDown();
+		int firstBall = getPinsKnockedDown(10);
+		int secondBall = 0;
 		int totalScorePerFrame;
-		int secondThrow = 0;
 
-		if (firstThrow < 10) {
-		    secondThrow = getPinsKnockedDown(10 - firstThrow);
-		    totalScorePerFrame = firstThrow + secondThrow;
+		if (firstBall < 10) {
+		    secondBall = getPinsKnockedDown(10 - firstBall);
+		    totalScorePerFrame = firstBall + secondBall;
 
 		    bowlingScores[j][i] = totalScorePerFrame;
-		    totalScorePerGame =+ totalScorePerFrame;
+		    totalScorePerGame += totalScorePerFrame;
 
 		}
 
 		else {
-		    totalScorePerFrame = firstThrow + secondThrow;
+		    totalScorePerFrame = firstBall + secondBall;
 		    bowlingScores[j][i] = totalScorePerFrame;
-		    totalScorePerGame =+ totalScorePerFrame;
+		    totalScorePerGame += totalScorePerFrame;
 
 		}
-		System.out.print(bowlingScores[j][i] + "\t");
+
+		System.out.print("\t" + bowlingScores[j][i]);
 
 	    }
 
-	    System.out.println();
+	    totalScorePerSeries += totalScorePerGame;
+	    System.out.print("\t" + totalScorePerGame);
+
+	    System.out.println("");
+	    System.out.println("-----------------------------------------------"
+		    + "-------------------------------------------------------");
 	}
 
+	System.out.print("Total Series");
+
+	System.out.println("\t\t\t\t\t\t\t\t\t\t\t" + totalScorePerSeries);
+	System.out.println("-----------------------------------------------"
+		+ "-------------------------------------------------------");
+
     }
 
-    public int getPinsKnockedDown() {
+    // generates a random number between 1 up to numberOfPinsInPlay
+    public int getPinsKnockedDown(int numberOfPinsInPlay) {
 
-	int pinsKnockedDown = (int) (1 + Math.random() * 10);
-
-	return pinsKnockedDown;
-    }
-
-    public int getPinsKnockedDown(int remainingPins) {
-
-	int pinsKnockedDown = (int) (1 + Math.random() * remainingPins);
+	int pinsKnockedDown = (int) (1 + Math.random() * numberOfPinsInPlay);
 
 	return pinsKnockedDown;
     }
