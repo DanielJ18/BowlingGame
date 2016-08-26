@@ -6,7 +6,7 @@ public class SimulatedBowling {
 
     public void bowl() {
 
-	System.out.println("Frames\t\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\tTotal");
+	System.out.println("Frames             1       2       3       4       5       6       7       8       9       10    Total");
 	System.out.println("-----------------------------------------------"
 		+ "-------------------------------------------------------");
 
@@ -27,6 +27,8 @@ public class SimulatedBowling {
 		if (firstBall < 10) {
 		    secondBall = getPinsKnockedDown(10 - firstBall);
 		    totalScorePerFrame = firstBall + secondBall;
+		    if (totalScorePerFrame == 10)
+			totalScorePerFrame = 12;
 
 		    bowlingScores[j][i] = totalScorePerFrame;
 		    totalScorePerGame += totalScorePerFrame;
@@ -35,17 +37,22 @@ public class SimulatedBowling {
 
 		else {
 		    totalScorePerFrame = firstBall + secondBall;
+		    if (totalScorePerFrame == 10)
+			totalScorePerFrame = 15;
+		    
 		    bowlingScores[j][i] = totalScorePerFrame;
 		    totalScorePerGame += totalScorePerFrame;
 
 		}
 
-		System.out.print("\t" + bowlingScores[j][i]);
+		System.out.printf("\t%4d", bowlingScores[j][i]);
 
 	    }
 
 	    totalScorePerSeries += totalScorePerGame;
-	    System.out.print("\t" + totalScorePerGame);
+	    System.out.print("\t");
+	    System.out.printf("%4d", totalScorePerGame );
+	    
 
 	    System.out.println("");
 	    System.out.println("-----------------------------------------------"
@@ -54,7 +61,7 @@ public class SimulatedBowling {
 
 	System.out.print("Total Series");
 
-	System.out.println("\t\t\t\t\t\t\t\t\t\t\t" + totalScorePerSeries);
+	System.out.println("\t\t\t\t\t\t\t\t\t\t\t " + totalScorePerSeries);
 	System.out.println("-----------------------------------------------"
 		+ "-------------------------------------------------------");
 
